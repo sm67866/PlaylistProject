@@ -43,35 +43,65 @@
 <div class="sparkles"></div>
 
 <div class="player">
-    <h1>✨ a little playlist ✨</h1>
+  <h2>✨ a little playlist ✨</h2>
 
-    <div id="title">Loading...</div>
+  <div id="title" style="margin:15px 0;">Loading...</div>
 
-    <div class="controls">
-        <button onclick="prevVideo()">⏮</button>
-        <button onclick="playVideo()">▶</button>
-        <button onclick="pauseVideo()">⏸</button>
-        <button onclick="nextVideo()">⏭</button>
-    </div>
+  <iframe id="yt"
+    width="100%"
+    height="250"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
 
-    <iframe id="yt" src=""></iframe>
+  <div style="margin-top:15px;">
+    <button onclick="prev()">⏮</button>
+    <button onclick="play()">▶</button>
+    <button onclick="pause()">⏸</button>
+    <button onclick="next()">⏭</button>
+  </div>
 </div>
-
 <div id="player"></div>
 
 <script>
-const playlistId = "PLM4XpluqhnrU";
+const songs = [
+  "ImKY6TZEyrI",
+  "E7-jiktiwPg",
+  "wVzvXW9bo5U"
+];
 
-document.getElementById("player").innerHTML = `
-<iframe
-  width="100%"
-  height="200"
-  src="https://www.youtube.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0"
-  frameborder="0"
-  allow="autoplay; encrypted-media"
-  allowfullscreen>
-</iframe>
-`;
+let current = 0;
+
+function loadSong(i) {
+  current = i;
+
+  document.getElementById("yt").src =
+    `https://www.youtube.com/embed/${songs[i]}?autoplay=1&rel=0`;
+
+  document.getElementById("title").innerText =
+    "Song " + (i + 1);
+}
+
+function next() {
+  current = (current + 1) % songs.length;
+  loadSong(current);
+}
+
+function prev() {
+  current = (current - 1 + songs.length) % songs.length;
+  loadSong(current);
+}
+
+function play() {
+  loadSong(current);
+}
+
+function pause() {
+  document.getElementById("yt").src = "";
+}
+
+loadSong(0);
 </script>
 </body>
 </html>
