@@ -1,90 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>a little playlist ✨</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 body {
-    margin: 0;
-    height: 100vh;
-    font-family: "Comfortaa", sans-serif;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(-45deg, #2b1055, #7597de, #e0a3ff, #ffb6c1);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Comfortaa, sans-serif;
+  background: linear-gradient(-45deg, #2b1055, #7597de, #e0a3ff, #ffb6c1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: white;
 }
 
 @keyframes gradient {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
 }
 
-.player {
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 30px;
-    width: 320px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+.card {
+  width: 320px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-h2 {
-    margin: 0 0 15px;
-    font-size: 18px;
+h1 {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 
 #title {
-    margin: 10px 0 15px;
-    font-size: 14px;
-    opacity: 0.9;
+  font-size: 13px;
+  margin: 10px 0;
+  opacity: 0.9;
 }
 
 button {
-    background: white;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 12px;
-    margin: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    transform: scale(1.05);
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  cursor: pointer;
 }
 
 iframe {
-    width: 100%;
-    height: 200px;
-    border-radius: 12px;
-    border: none;
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  border: none;
 }
 </style>
 </head>
 
 <body>
 
-<div class="player">
-    <h2>✨ a little playlist ✨</h2>
+<div class="card">
+  <h1>✨ a little playlist ✨</h1>
 
-    <div id="title">Loading...</div>
+  <div id="title">Loading...</div>
 
-    <iframe id="yt"></iframe>
+  <iframe id="player"></iframe>
 
-    <div style="margin-top:10px;">
-        <button onclick="prev()">⏮</button>
-        <button onclick="play()">▶</button>
-        <button onclick="pause()">⏸</button>
-        <button onclick="next()">⏭</button>
-    </div>
+  <div>
+    <button onclick="prev()">⏮</button>
+    <button onclick="play()">▶</button>
+    <button onclick="next()">⏭</button>
+  </div>
 </div>
 
 <script>
@@ -94,35 +88,31 @@ const songs = [
   "wVzvXW9bo5U"
 ];
 
-let current = 0;
+let i = 0;
 
-function loadSong(i) {
-    current = i;
+function load(n) {
+  i = n;
 
-    document.getElementById("yt").src =
-        `https://www.youtube.com/embed/${songs[i]}?autoplay=1&rel=0`;
+  document.getElementById("player").src =
+    `https://www.youtube.com/embed/${songs[i]}?autoplay=1&rel=0`;
 
-    document.getElementById("title").innerText =
-        "Song " + (i + 1);
+  document.getElementById("title").innerText =
+    "Song " + (i + 1);
 }
 
 function next() {
-    loadSong((current + 1) % songs.length);
+  load((i + 1) % songs.length);
 }
 
 function prev() {
-    loadSong((current - 1 + songs.length) % songs.length);
+  load((i - 1 + songs.length) % songs.length);
 }
 
 function play() {
-    loadSong(current);
+  load(i);
 }
 
-function pause() {
-    document.getElementById("yt").src = "";
-}
-
-loadSong(0);
+load(0);
 </script>
 
 </body>
