@@ -15,7 +15,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: Comfortaa, sans-serif;
-  background: linear-gradient(-45deg, #2b1055, #7597de, #e0a3ff, #ffb6c1);
+  background: linear-gradient(-45deg,#2b1055,#7597de,#e0a3ff,#ffb6c1);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
   color: white;
@@ -29,10 +29,10 @@ body {
 
 .card {
   width: 340px;
+  padding: 25px;
+  border-radius: 20px;
   background: rgba(255,255,255,0.12);
   backdrop-filter: blur(15px);
-  border-radius: 20px;
-  padding: 25px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
@@ -90,31 +90,29 @@ const songs = [
 
 let current = 0;
 
-function loadSong(index) {
-  current = index;
+function load(i) {
+  current = i;
 
   document.getElementById("player").src =
-    "https://www.youtube.com/embed/" +
-    songs[index] +
-    "?autoplay=1&rel=0";
+    "https://www.youtube.com/embed/" + songs[i] + "?autoplay=1&rel=0";
 
   document.getElementById("title").innerText =
-    "Song " + (index + 1);
+    "Song " + (i + 1);
 }
 
 function next() {
-  loadSong((current + 1) % songs.length);
+  load((current + 1) % songs.length);
 }
 
 function prev() {
-  loadSong((current - 1 + songs.length) % songs.length);
+  load((current - 1 + songs.length) % songs.length);
 }
 
 function play() {
-  loadSong(current);
+  load(current);
 }
 
-loadSong(0);
+load(0);
 </script>
 
 </body>
