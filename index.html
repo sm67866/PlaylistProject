@@ -28,7 +28,7 @@ body {
 }
 
 .card {
-  width: 320px;
+  width: 340px;
   background: rgba(255,255,255,0.12);
   backdrop-filter: blur(15px);
   border-radius: 20px;
@@ -88,31 +88,33 @@ const songs = [
   "wVzvXW9bo5U"
 ];
 
-let i = 0;
+let current = 0;
 
-function load(n) {
-  i = n;
+function loadSong(index) {
+  current = index;
 
   document.getElementById("player").src =
-    `https://www.youtube.com/embed/${songs[i]}?autoplay=1&rel=0`;
+    "https://www.youtube.com/embed/" +
+    songs[index] +
+    "?autoplay=1&rel=0";
 
   document.getElementById("title").innerText =
-    "Song " + (i + 1);
+    "Song " + (index + 1);
 }
 
 function next() {
-  load((i + 1) % songs.length);
+  loadSong((current + 1) % songs.length);
 }
 
 function prev() {
-  load((i - 1 + songs.length) % songs.length);
+  loadSong((current - 1 + songs.length) % songs.length);
 }
 
 function play() {
-  load(i);
+  loadSong(current);
 }
 
-load(0);
+loadSong(0);
 </script>
 
 </body>
