@@ -77,15 +77,15 @@ button {
 
 <script>
 const songs = [
-  "music/song1new.mp3",
-  "music/song2new.mp3",
-  "music/song3new.mp3",
-  "music/song4new.mp3",
-  "music/song5new.mp3",
-  "music/song6new.mp3",
-  "music/song7new.mp3",
-  "music/song8new.mp3",
-  "music/song9new.mp3"
+  { title: "Be Sweet - Japanese Breakfast", file: "music/song1new.mp3" },
+  { title: "Can't Take My Eyes Off of You - Lauryn Hill", file: "music/song2new.mp3" },
+  { title: "Kiss Me - Sixpence None The Richer", file: "music/song3new.mp3" },
+  { title: "1st Day of My Life - Bright Eyes", file: "music/song4new.mp3" },
+  { title: "Lovefool - The Cardigans", file: "music/song5new.mp3" },
+  { title: "Fade Into You - Mazzy Star", file: "music/song6new.mp3" },
+  { title: "Such Great Heights - The Postal Service", file: "music/song7new.mp3" },
+  { title: "Let's Talk About Spaceships - Say Hi To Your Mom", file: "music/song8new.mp3" },
+  { title: "Loving Is Easy - Rex Orange County", file: "music/song9new.mp3" }
 ];
 
 let current = 0;
@@ -95,8 +95,8 @@ const title = document.getElementById("title");
 
 function load(i) {
   current = i;
-  audio.src = songs[i];
-  title.innerText = "Song " + (i + 1);
+  audio.src = songs[i].file;
+  title.innerText = songs[i].title;
 }
 
 function play() {
@@ -119,6 +119,7 @@ function prev() {
 
 load(0);
 </script>
+
 
 </body>
 </html>
