@@ -72,14 +72,47 @@ iframe {
 
   <div id="title">Loading...</div>
 
-  <iframe
-  width="100%"
-  height="200"
-  src="https://www.youtube.com/embed/videoseries?list=PLM4XpluqhnrU"
-  frameborder="0"
-  allow="autoplay; encrypted-media"
-  allowfullscreen>
-</iframe>
+ <iframe id="yt" style="display:none;"></iframe>
+  <script>
+const songs = [
+  "ImKY6TZEyrI",
+  "E7-jiktiwPg",
+  "wVzvXW9bo5U",
+  "lYbxqA1i56o",
+  "GLg2352T_vc",
+  "39IU7ADaXmQ",
+  "CQNZUdtn9nE",
+  "9klEsdUxNvY"
+];
+
+let current = 0;
+
+function load(i) {
+  current = i;
+
+  document.getElementById("yt").src =
+    "https://www.youtube.com/embed/" +
+    songs[i] +
+    "?autoplay=1&rel=0&controls=0";
+
+  document.getElementById("title").innerText =
+    "Song " + (i + 1);
+}
+
+function next() {
+  load((current + 1) % songs.length);
+}
+
+function prev() {
+  load((current - 1 + songs.length) % songs.length);
+}
+
+function play() {
+  load(current);
+}
+
+load(0);
+</script>
 
   <div>
     <button onclick="prev()">⏮</button>
