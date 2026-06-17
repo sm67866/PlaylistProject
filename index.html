@@ -43,9 +43,14 @@ h1 {
 }
 
 #title {
-  font-size: 13px;
+  font-size: 14px;
   margin: 10px 0;
   opacity: 0.9;
+}
+
+audio {
+  width: 100%;
+  margin-top: 10px;
 }
 
 button {
@@ -55,13 +60,6 @@ button {
   border-radius: 20px;
   cursor: pointer;
 }
-
-iframe {
-  width: 100%;
-  height: 200px;
-  border-radius: 12px;
-  border: none;
-}
 </style>
 </head>
 
@@ -70,9 +68,9 @@ iframe {
 <div class="card">
   <h1>✨ a little playlist ✨</h1>
 
-  <div id="title">Loading...</div>
+  <div id="title">Ready</div>
 
-  <audio id="audioPlayer" controls style="width:100%; margin-top:10px;"></audio>
+  <audio id="player" controls></audio>
 
   <div>
     <button onclick="prev()">⏮</button>
@@ -82,8 +80,7 @@ iframe {
   </div>
 </div>
 
- <iframe id="yt" width="100%" height="200" style="border:none; border-radius:12px;"></iframe>
- <script>
+<script>
 const songs = [
   "music/song1.mp3",
   "music/song2.mp3",
@@ -98,7 +95,7 @@ const songs = [
 
 let current = 0;
 
-const audio = document.getElementById("audioPlayer");
+const audio = document.getElementById("player");
 const title = document.getElementById("title");
 
 function load(i) {
@@ -127,13 +124,6 @@ function prev() {
 
 load(0);
 </script>
-  <div>
-    <button onclick="prev()">⏮</button>
-    <button onclick="play()">▶</button>
-    <button onclick="next()">⏭</button>
-  </div>
-</div>
-
 
 </body>
 </html>
