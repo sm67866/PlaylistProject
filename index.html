@@ -72,46 +72,58 @@ iframe {
 
   <div id="title">Loading...</div>
 
+  <audio id="audioPlayer" controls style="width:100%; margin-top:10px;"></audio>
+
+  <div>
+    <button onclick="prev()">⏮</button>
+    <button onclick="play()">▶</button>
+    <button onclick="pause()">⏸</button>
+    <button onclick="next()">⏭</button>
+  </div>
+</div>
+
  <iframe id="yt" width="100%" height="200" style="border:none; border-radius:12px;"></iframe>
  <script>
 const songs = [
-  "ImKY6TZEyrI",
-  "E7-jiktiwPg",
-  "wVzvXW9bo5U",
-  "lYbxqA1i56o",
-  "GLg2352T_vc",
-  "39IU7ADaXmQ",
-  "CQNZUdtn9nE",
-  "9klEsdUxNvY"
+  "music/song1.mp3",
+  "music/song2.mp3",
+  "music/song3.mp3",
+  "music/song4.mp3",
+  "music/song5.mp3",
+  "music/song6.mp3",
+  "music/song7.mp3",
+  "music/song8.mp3",
+  "music/song9.mp3"
 ];
 
 let current = 0;
 
-const player = document.getElementById("yt");
+const audio = document.getElementById("audioPlayer");
 const title = document.getElementById("title");
 
 function load(i) {
   current = i;
-
-  player.src =
-    "https://www.youtube.com/embed/" +
-    songs[i] +
-    "?autoplay=1&rel=0";
-
+  audio.src = songs[i];
   title.innerText = "Song " + (i + 1);
 }
 
-window.next = function () {
+function play() {
+  audio.play();
+}
+
+function pause() {
+  audio.pause();
+}
+
+function next() {
   load((current + 1) % songs.length);
-};
+  audio.play();
+}
 
-window.prev = function () {
+function prev() {
   load((current - 1 + songs.length) % songs.length);
-};
-
-window.play = function () {
-  load(current);
-};
+  audio.play();
+}
 
 load(0);
 </script>
