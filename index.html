@@ -72,46 +72,52 @@ iframe {
 
   <div id="title">Loading...</div>
 
- <iframe id="yt" style="display:none;"></iframe>
+ <iframe id="yt" width="100%" height="200" style="border:none; border-radius:12px;"></iframe>
   <script>
-const songs = [
-  "ImKY6TZEyrI",
-  "E7-jiktiwPg",
-  "wVzvXW9bo5U",
-  "lYbxqA1i56o",
-  "GLg2352T_vc",
-  "39IU7ADaXmQ",
-  "CQNZUdtn9nE",
-  "9klEsdUxNvY"
-];
+document.addEventListener("DOMContentLoaded", () => {
 
-let current = 0;
+  const songs = [
+    "ImKY6TZEyrI",
+    "E7-jiktiwPg",
+    "wVzvXW9bo5U",
+    "lYbxqA1i56o",
+    "GLg2352T_vc",
+    "39IU7ADaXmQ",
+    "CQNZUdtn9nE",
+    "9klEsdUxNvY"
+  ];
 
-function load(i) {
-  current = i;
+  let current = 0;
 
-  document.getElementById("yt").src =
-    "https://www.youtube.com/embed/" +
-    songs[i] +
-    "?autoplay=1&rel=0&controls=0";
+  const player = document.getElementById("yt");
+  const title = document.getElementById("title");
 
-  document.getElementById("title").innerText =
-    "Song " + (i + 1);
-}
+  function load(i) {
+    current = i;
 
-function next() {
-  load((current + 1) % songs.length);
-}
+    const url = `https://www.youtube.com/embed/${songs[i]}?autoplay=1&rel=0`;
 
-function prev() {
-  load((current - 1 + songs.length) % songs.length);
-}
+    player.src = url;
 
-function play() {
-  load(current);
-}
+    title.innerText = "Song " + (i + 1);
 
-load(0);
+    console.log("Loading:", url);
+  }
+
+  window.next = function () {
+    load((current + 1) % songs.length);
+  };
+
+  window.prev = function () {
+    load((current - 1 + songs.length) % songs.length);
+  };
+
+  window.play = function () {
+    load(current);
+  };
+
+  load(0);
+});
 </script>
 
   <div>
